@@ -17,15 +17,14 @@
  */
 package rolling;
 
+import org.apache.log4j.Logger;
 import org.apache.storm.Config;
-import org.apache.storm.testing.TestWordSpout;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;
-import org.apache.log4j.Logger;
-import org.apache.storm.starter.bolt.IntermediateRankingsBolt;
-import org.apache.storm.starter.bolt.RollingCountBolt;
-import org.apache.storm.starter.bolt.TotalRankingsBolt;
-import org.apache.storm.starter.util.StormRunner;
+
+import bolt.IntermediateRankingsBolt;
+import bolt.TotalRankingsBolt;
+import util.StormRunner;
 
 /**
  * This topology does a continuous computation of the top N words that the topology has seen in terms of cardinality.
@@ -63,8 +62,8 @@ public class RollingTopMerchants {
     String counterId = "counter";
     String intermediateRankerId = "intermediateRanker";
     String totalRankerId = "finalRanker";
-    builder.setSpout(spoutId, new TestWordSpout(), 5);
-    builder.setBolt(counterId, new RollingCountBolt(9, 3), 4).fieldsGrouping(spoutId, new Fields("word"));
+    builder.setSpout(spoutId, new EbatesKafkaClickSpout(), 5);
+    builder.setBolt(counterId, new RollingMerchantCountBolt(9, 3), 4).fieldsGrouping(spoutId, new Fields("word"));
     builder.setBolt(intermediateRankerId, new IntermediateRankingsBolt(TOP_N), 4).fieldsGrouping(counterId, new Fields(
         "obj"));
     builder.setBolt(totalRankerId, new TotalRankingsBolt(TOP_N)).globalGrouping(intermediateRankerId);

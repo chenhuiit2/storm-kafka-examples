@@ -20,7 +20,6 @@ package org.apache.storm.kafka.trident;
 
 import org.apache.storm.LocalDRPC;
 import org.apache.storm.generated.StormTopology;
-import org.apache.storm.starter.trident.DebugMemoryMapState;
 import org.apache.storm.trident.Stream;
 import org.apache.storm.trident.TridentState;
 import org.apache.storm.trident.TridentTopology;
@@ -36,6 +35,8 @@ import org.apache.storm.trident.tuple.TridentTuple;
 import org.apache.storm.tuple.Fields;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import trident.DebugMemoryMapState;
 
 public class TridentKafkaConsumerTopology {
     protected static final Logger LOG = LoggerFactory.getLogger(TridentKafkaConsumerTopology.class);

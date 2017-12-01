@@ -17,6 +17,11 @@
  */
 package rolling;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.log4j.Logger;
 import org.apache.storm.Config;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
@@ -26,13 +31,9 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.TupleUtils;
-import org.apache.log4j.Logger;
-import org.apache.storm.starter.tools.NthLastModifiedTimeTracker;
-import org.apache.storm.starter.tools.SlidingWindowCounter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import tools.NthLastModifiedTimeTracker;
+import tools.SlidingWindowCounter;
 
 /**
  * This bolt performs rolling counts of incoming objects, i.e. sliding window based counting.

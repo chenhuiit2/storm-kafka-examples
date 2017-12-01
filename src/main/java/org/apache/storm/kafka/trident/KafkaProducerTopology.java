@@ -18,16 +18,16 @@
 
 package org.apache.storm.kafka.trident;
 
+import java.util.Properties;
+
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.storm.generated.StormTopology;
 import org.apache.storm.kafka.bolt.KafkaBolt;
-import org.apache.storm.kafka.KafkaSpout;
 import org.apache.storm.kafka.bolt.mapper.FieldNameBasedTupleToKafkaMapper;
 import org.apache.storm.kafka.bolt.selector.DefaultTopicSelector;
-import org.apache.storm.starter.spout.RandomSentenceSpout;
 import org.apache.storm.topology.TopologyBuilder;
 
-import java.util.Properties;
+import spout.RandomSentenceSpout;
 
 public class KafkaProducerTopology {
     /**
