@@ -124,7 +124,7 @@ public class RollingMerchantCountBolt extends BaseRichBolt {
   }
 
   private void countObjAndAck(Tuple tuple) {
-    Object obj = tuple.getValue(0);
+    Object obj = tuple.getValue(3); //merchant in index 3
     counter.incrementCount(obj);
     collector.ack(tuple);
   }
