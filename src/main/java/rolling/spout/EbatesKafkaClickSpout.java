@@ -1,4 +1,4 @@
-package rolling;
+package rolling.spout;
 
 import java.util.Map;
 

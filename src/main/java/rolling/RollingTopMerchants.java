@@ -24,6 +24,8 @@ import org.apache.storm.tuple.Fields;
 
 import bolt.IntermediateRankingsBolt;
 import bolt.TotalRankingsBolt;
+import rolling.bolt.RollingMerchantCountBolt;
+import rolling.spout.EbatesKafkaClickSpout;
 import util.StormRunner;
 
 /**
@@ -63,7 +65,7 @@ public class RollingTopMerchants {
     String intermediateRankerId = "intermediateRanker";
     String totalRankerId = "finalRanker";
     builder.setSpout(spoutId, new EbatesKafkaClickSpout(), 5);
-    builder.setBolt(counterId, new RollingMerchantCountBolt(9, 3), 4).fieldsGrouping(spoutId, new Fields("word"));
+    builder.setBolt(counterId, new RollingMerchantCountBolt(9, 3), 4).fieldsGrouping(spoutId, new Fields("merchant_id"));
     builder.setBolt(intermediateRankerId, new IntermediateRankingsBolt(TOP_N), 4).fieldsGrouping(counterId, new Fields(
         "obj"));
     builder.setBolt(totalRankerId, new TotalRankingsBolt(TOP_N)).globalGrouping(intermediateRankerId);
